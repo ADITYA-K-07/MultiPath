@@ -124,10 +124,11 @@ After running a query, open `viz/map_viewer.html` in a browser — it loads the 
 
 ## 📄 License
 
-This project is for academic purposes as part of a Data Structures course. Add a license (e.g., MIT) here if you intend to open-source it further.
+MIT
 
 ---
 
 ## 🙋 Author
 
-Built by [Your Name] as a Data Structures course project.
+Aditya Katare
+Aryan Khade
