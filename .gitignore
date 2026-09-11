@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+*.o
+*.obj
+*.exe
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# OSM data files (large binary files - don't commit these)
+data/*.pbf
+data/*.osm
+
+# Editor/OS junk
+.vscode/
+*.swp
+.DS_Store
