@@ -3,6 +3,7 @@ build/
 *.o
 *.obj
 *.exe
+test_build
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
