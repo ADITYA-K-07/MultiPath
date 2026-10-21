@@ -14,6 +14,7 @@
 #include <nearest.hpp>
 #include "geo.hpp"
 #include "graph_types.hpp"
+#include "dijkstra.hpp"
 
 // Road types a car can't use. Skipped in BOTH passes so they stay consistent.
 bool is_driveable(const char* highway) {
@@ -189,5 +190,20 @@ int main() {
                   << d << " m away\n";
     }
 
+    // ---- Dijkstra test ----
+    int64_t s = nearest_node(graph, 18.5195, 73.8553);   // Shaniwar Wada
+    int64_t t = nearest_node(graph, 18.5289, 73.8744);   // Pune Railway Station
+    SearchResult r = dijkstra(graph, s, t);
+
+    const Node& sn = graph.nodes.at(s);
+    const Node& tn = graph.nodes.at(t);
+    std::cout << "found: " << r.found << "\n";
+    std::cout << "route cost (m): " << r.cost << "\n";
+    std::cout << "straight-line (m): " << haversine(sn.lat, sn.lon, tn.lat, tn.lon) << "\n";
+    std::cout << "path vertices: " << r.path.size() << "\n";
+    std::cout << "nodes expanded: " << r.nodes_expanded << "\n";
+    std::cout << "max queue size: " << r.max_queue << "\n";
+
     return 0;
 }
+
