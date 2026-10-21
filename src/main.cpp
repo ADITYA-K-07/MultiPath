@@ -15,6 +15,8 @@
 #include "geo.hpp"
 #include "graph_types.hpp"
 #include "dijkstra.hpp"
+#include "geojson.hpp"
+#include "astar.hpp"
 
 // Road types a car can't use. Skipped in BOTH passes so they stay consistent.
 bool is_driveable(const char* highway) {
@@ -203,6 +205,22 @@ int main() {
     std::cout << "path vertices: " << r.path.size() << "\n";
     std::cout << "nodes expanded: " << r.nodes_expanded << "\n";
     std::cout << "max queue size: " << r.max_queue << "\n";
+
+    if (r.found && write_geojson(graph, r.path, "viewer/route.geojson")) {
+        std::cout << "wrote viewer/route.geojson\n";
+    }
+
+    // ---- A* vs Dijkstra ----
+    SearchResult ra = astar(graph, s, t);
+    std::cout << "\n--- A* ---\n";
+    std::cout << "found: " << ra.found << "\n";
+    std::cout << "route cost (m): " << ra.cost << "\n";
+    std::cout << "nodes expanded: " << ra.nodes_expanded << "\n";
+    std::cout << "max queue size: " << ra.max_queue << "\n";
+    std::cout << "same cost as Dijkstra: "
+              << (std::abs(ra.cost - r.cost) < 1e-6 ? "yes" : "NO") << "\n";
+    std::cout << "expanded " << (100.0 * ra.nodes_expanded / r.nodes_expanded)
+              << "% of Dijkstra's vertices\n";
 
     return 0;
 }
