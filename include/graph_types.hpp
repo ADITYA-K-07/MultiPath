@@ -17,6 +17,7 @@ struct Edge {
 struct Graph {
     std::unordered_map<int64_t, Node> nodes;
     std::unordered_map<int64_t, std::vector<Edge>> adjacency;
+    std::unordered_map<int64_t, std::vector<Edge>> reverse_adjacency;
 };
 
 

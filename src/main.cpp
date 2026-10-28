@@ -17,6 +17,7 @@
 #include "dijkstra.hpp"
 #include "geojson.hpp"
 #include "astar.hpp"
+#include "reverse.hpp"
 
 // Road types a car can't use. Skipped in BOTH passes so they stay consistent.
 bool is_driveable(const char* highway) {
@@ -144,7 +145,14 @@ int main() {
         edge_count += entry.second.size();
     }
     std::cout << "graph vertices: " << graph.nodes.size() << "\n";
+    build_reverse(graph);   
     std::cout << "graph edges (directed): " << edge_count << "\n";
+   
+    size_t rev_count = 0;
+    for (const auto& entry : graph.reverse_adjacency) {
+        rev_count += entry.second.size();
+    }
+    std::cout << "reverse edges: " << rev_count << "\n";
 
     // ---- Sanity checks ----
     std::unordered_map<int, int> degree_hist;
